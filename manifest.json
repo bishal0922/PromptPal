@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "PromptPal",
+    "version": "1.0.0",
+    "description": "AI Prompt Engineering Assistant",
+    "permissions": [
+      "storage",
+      "activeTab"
+    ],
+    "action": {
+      "default_popup": "index.html"
+    }
+  }
