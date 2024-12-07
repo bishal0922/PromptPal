@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Select, SelectItem, Spinner } from "@nextui-org/react";
+import {Select, SelectItem, Input, Spinner} from "@nextui-org/react";
 import { promptCategories, promptTemplates } from '../data/promptData';
 import PromptCard from './PromptCard';
 
 function Popup() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPrompts, setFilteredPrompts] = useState([]);
+  const [filteredPrompts, setFilteredPrompts] = useState(promptTemplates);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading state
     const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
@@ -40,7 +39,7 @@ function Popup() {
   if (isLoading) {
     return (
       <div className="w-96 h-96 flex items-center justify-center">
-        <Spinner size="lg" />
+        <Spinner />
       </div>
     );
   }
@@ -51,9 +50,9 @@ function Popup() {
       
       <div className="space-y-4">
         <Select 
-          label="Category" 
+          label="Category"
           placeholder="Select a category"
-          selectedKeys={selectedCategory ? [selectedCategory] : []}
+          value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
           {promptCategories.map((category) => (
@@ -64,14 +63,13 @@ function Popup() {
         </Select>
 
         <Input
-          type="text"
           label="Search prompts"
           placeholder="Type to search..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        <div className="prompt-list space-y-4 max-h-[400px] overflow-y-auto">
+        <div className="space-y-4 max-h-[400px] overflow-y-auto">
           {filteredPrompts.map(prompt => (
             <PromptCard key={prompt.id} prompt={prompt} />
           ))}

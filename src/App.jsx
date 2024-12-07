@@ -4,9 +4,9 @@ import Popup from './components/Popup';
 function App() {
   return (
     <NextUIProvider>
-      <main className="dark text-foreground bg-background">
+      <div className="dark text-foreground bg-background">
         <Popup />
-      </main>
+      </div>
     </NextUIProvider>
   );
 }

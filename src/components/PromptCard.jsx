@@ -5,9 +5,7 @@ const PromptCard = ({ prompt }) => {
   const [variables, setVariables] = useState({});
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (!prompt) {
-    return null;
-  }
+  if (!prompt) return null;
 
   const handleVariableChange = (variable, value) => {
     setVariables(prev => ({
@@ -28,22 +26,19 @@ const PromptCard = ({ prompt }) => {
     try {
       const text = processTemplate();
       await navigator.clipboard.writeText(text);
-      // You could add a success notification here
     } catch (err) {
       console.error('Failed to copy:', err);
-      // You could add an error notification here
     }
   };
 
   return (
-    <Card className="w-full p-4">
+    <Card className="p-4">
       <div className="flex justify-between items-start">
         <div>
           <h3 className="text-lg font-semibold">{prompt.title}</h3>
           <p className="text-sm text-gray-500">{prompt.description}</p>
         </div>
         <Button
-          size="sm"
           color="primary"
           onPress={() => setIsExpanded(!isExpanded)}
         >
@@ -69,8 +64,8 @@ const PromptCard = ({ prompt }) => {
             </p>
           </div>
           <Button 
-            color="success" 
-            className="w-full"
+            color="success"
+            fullWidth
             onPress={copyToClipboard}
           >
             Copy to Clipboard
